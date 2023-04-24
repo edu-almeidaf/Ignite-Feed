@@ -18,7 +18,7 @@ export function Post() {
 
       <div className={ styles.content }>
         <p>Fala galeraa 👋</p>
-        <p>Acabei de fazer um post muito bacana no meu Linkedin, sobre o dia que fui instrutor de Redux por um dia, corre lá ver! 🚀</p>
+        <p>Acabei de fazer um post muito bacana no meu LinkedIn, sobre o dia que fui instrutor de Redux por um dia, corre lá ver! 🚀</p>
         <p><a href="https://www.linkedin.com/posts/almeidaedu_fala-rede-tudo-bom-quero-compartilhar-com-activity-7052781156987023360-FQrz?utm_source=share&utm_medium=member_desktop" target='_blank'>Clique aqui para ver</a></p>
         <p>
           <a href="#">#react</a>{' '}
@@ -26,6 +26,17 @@ export function Post() {
           <a href="#">#redux</a>
         </p>
       </div>
+
+      <form className={ styles.commentForm }>
+        <strong>Deixe seu feedback</strong>
+        <textarea
+          placeholder="Deixe um comentário"
+        />
+
+        <footer>
+          <button type="submit">Publicar</button>
+        </footer>
+      </form>
     </article>
   )
 }
