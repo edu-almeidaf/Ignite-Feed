@@ -3,6 +3,7 @@ import './global.css'
 import styles from './App.module.css';
 import { Sidebar } from "./components/Sidebar";
 import { Post } from "./components/Post";
+import { posts } from "./helpers/postData";
 
 export function App() {
   return (
@@ -12,8 +13,14 @@ export function App() {
       <div className={ styles.wrapper }>
         <Sidebar />
         <main>
-          <Post />
-          <Post />
+          {
+            posts.map((post) => (
+              <Post
+                key={post.id}
+                post={ post }
+              />
+            ))
+          }
         </main>
       </div>
     </div>

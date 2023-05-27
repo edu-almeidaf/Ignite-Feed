@@ -1,31 +1,54 @@
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
 import styles from './Post.module.css';
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
 
-export function Post() {
+export function Post({ post }) {
+  const { author, content, publishedAt, tags, id } = post;
+
+  const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+    locale: ptBR,
+  });
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  })
+
   return (
-    <article className={ styles.post }>
+    <article className={ styles.post } key={ id }>
       <header>
         <div className={ styles.author }>
-          <Avatar src="https://github.com/edu-almeidaf.png" />
+          <Avatar src={ author.avatarUrl } />
 
           <div className={ styles.authorInfo }>
-            <strong>Eduardo de Almeida Fernandes</strong>
-            <span>Web Developer</span>
+            <strong>{ author.name }</strong>
+            <span>{ author.role }</span>
           </div>
         </div>
 
-        <time title="23 de abril às 21:15h" dateTime="2022-04-23 21:15:05">Publicado há 1h</time>
+        <time title={ publishedDateFormatted } dateTime={ publishedAt.toISOString() }>
+          { publishedDateRelativeToNow }
+        </time>
       </header>
 
       <div className={ styles.content }>
-        <p>Fala galeraa 👋</p>
-        <p>Acabei de fazer um post muito bacana no meu LinkedIn, sobre o dia que fui instrutor de Redux por um dia, corre lá ver! 🚀</p>
-        <p><a href="https://www.linkedin.com/posts/almeidaedu_fala-rede-tudo-bom-quero-compartilhar-com-activity-7052781156987023360-FQrz?utm_source=share&utm_medium=member_desktop" target='_blank'>Clique aqui para ver</a></p>
+        {
+          content.map((line, i) => {
+            if (line.type === 'paragraph') {
+              return <p key={i}>{ line.content }</p>
+            } else if (line.type === 'link') {
+              return <p key={i}><a href={line.content} target='_blank'>{ line.text }</a></p>
+            }
+          })
+        }
         <p>
-          <a href="#">#react</a>{' '}
-          <a href="#">#linkedin</a>{' '}
-          <a href="#">#redux</a>
+          {
+            tags.map((tag, i) => (
+              <a href="#" key={i}>{ tag }{' '}</a>
+            ))
+          }
         </p>
       </div>
 
