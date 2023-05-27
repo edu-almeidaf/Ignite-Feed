@@ -8,7 +8,6 @@ O Ignite Feed é uma aplicação desenvolvida em ReactJS que simula a tela de po
 - <a href="#demonstracao">Demonstração</a>
 - <a href="#rodar">Como rodar o projeto?</a>
 - <a href="#tecnologias">Tecnologias Utilizadas</a>
-- <a href="#autores">Autores</a>
 - <a href="#passos">Próximos Passos</a>
 
 <a id="funcionalidades"></a>
