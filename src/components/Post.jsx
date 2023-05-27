@@ -26,6 +26,24 @@ export function Post({ post }) {
     setNewCommentText('');
   }
 
+  const handleNewCommentChange = ({ target }) => {
+    target.setCustomValidity('');
+    setNewCommentText(target.value);
+  }
+
+  const handleNewCommentInvalid = ({ target }) => {
+    target.setCustomValidity('Esse campo é obrigatório!');
+  }
+
+  const deleteComment = (commentToDelete) => {
+    const commentsWithoutDeletedOne = comments.filter((comment) => (
+      comment !== commentToDelete
+    ));
+    setComments(commentsWithoutDeletedOne);
+  }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
+
   return (
     <article className={ styles.post }>
       <header>
@@ -67,11 +85,15 @@ export function Post({ post }) {
         <textarea
           placeholder="Deixe um comentário"
           value={ newCommentText }
-          onChange={ ({ target }) => setNewCommentText(target.value) }
+          onChange={ handleNewCommentChange }
+          onInvalid={ handleNewCommentInvalid }
+          required
         />
 
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={ isNewCommentEmpty }>
+            Publicar
+          </button>
         </footer>
       </form>
 
@@ -81,6 +103,7 @@ export function Post({ post }) {
             <Comment
               key={ comment }
               content={ comment }
+              onDeleteComment={ deleteComment }
             />
           ))
         }
