@@ -3,9 +3,13 @@ import ptBR from 'date-fns/locale/pt-BR';
 import styles from './Post.module.css';
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
+import { useState } from 'react';
 
 export function Post({ post }) {
-  const { author, content, publishedAt, tags, id } = post;
+  const { author, content, publishedAt, tags } = post;
+
+  const [comments, setComments] = useState(['Post muito bacana hein?']);
+  const [newCommentText, setNewCommentText] = useState('');
 
   const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
     locale: ptBR,
@@ -16,8 +20,14 @@ export function Post({ post }) {
     addSuffix: true,
   })
 
+  const handleCreateNewComment = (event) => {
+    event.preventDefault();
+    setComments([...comments, newCommentText]);
+    setNewCommentText('');
+  }
+
   return (
-    <article className={ styles.post } key={ id }>
+    <article className={ styles.post }>
       <header>
         <div className={ styles.author }>
           <Avatar src={ author.avatarUrl } />
@@ -35,11 +45,11 @@ export function Post({ post }) {
 
       <div className={ styles.content }>
         {
-          content.map((line, i) => {
+          content.map((line) => {
             if (line.type === 'paragraph') {
-              return <p key={i}>{ line.content }</p>
+              return <p key={line.content}>{ line.content }</p>
             } else if (line.type === 'link') {
-              return <p key={i}><a href={line.content} target='_blank'>{ line.text }</a></p>
+              return <p key={line.content}><a href={line.content} target='_blank'>{ line.text }</a></p>
             }
           })
         }
@@ -52,10 +62,12 @@ export function Post({ post }) {
         </p>
       </div>
 
-      <form className={ styles.commentForm }>
+      <form className={ styles.commentForm } onSubmit={ handleCreateNewComment }>
         <strong>Deixe seu feedback</strong>
         <textarea
           placeholder="Deixe um comentário"
+          value={ newCommentText }
+          onChange={ ({ target }) => setNewCommentText(target.value) }
         />
 
         <footer>
@@ -64,9 +76,14 @@ export function Post({ post }) {
       </form>
 
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {
+          comments.map((comment) => (
+            <Comment
+              key={ comment }
+              content={ comment }
+            />
+          ))
+        }
       </div>
     </article>
   )
