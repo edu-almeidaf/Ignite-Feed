@@ -1,8 +1,6 @@
 # Projeto Ignite-Feed
 
-![Ignite Feed](./public/readme/home.png)
-
-O projeto simula a tela de posts de um blog, onde a pessoa pode adicionar um comentário, excluir esse comentário e dar like.
+O Ignite Feed é uma aplicação desenvolvida em ReactJS que simula a tela de posts de um blog, onde a pessoa pode interagir com os posts já existentes comentando e curtindo. Desenvolvi essa aplicação dentro do curso Ignite da Rocketseat.
 
 ## Indice
 - <a href="#funcionalidades">Funcionalidades do Projeto</a>
@@ -25,8 +23,8 @@ O projeto simula a tela de posts de um blog, onde a pessoa pode adicionar um com
 Versão desktop:
 ![Versão Desktop](./public/readme/home.png)
 
-Versão Mobile:
-![Versão Mobile](./public/readme/mobile.jpg)
+Versão Mobile:<br>
+<img src="./public/readme/mobile.jpg" alt="Versão mobile" style="width: 400px" />
 
 <a id="demonstracao"></a>
 ## :bulb: Demonstração
