@@ -90,7 +90,7 @@ export function Post({ post }: PostProps) {
             if (line.type === 'paragraph') {
               return <p key={line.content}>{ line.content }</p>
             } else if (line.type === 'link') {
-              return <p key={line.content}><a href={line.content} target='_blank'>line.text</a></p>
+              return <p key={line.content}><a href={line.content} target='_blank'>{line.text}</a></p>
             }
           })
         }
